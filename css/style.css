@@ -62,3 +62,6 @@ body{
     background-color: dodgerblue;
 }
 
+.cell.bomb.clicked {
+    background-color: red;
+}

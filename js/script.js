@@ -39,9 +39,6 @@ const createCell = (number) => {
         cell.classList.add('hard-cell');
     }
     cell.innerText = number; // preparo la lettura del numero al suo interno
-    if(bombs.includes(parseInt(cell.innerText))){
-        cell.classList.add('bomb');
-    }
     
     return cell;
 }
@@ -55,8 +52,14 @@ const onCellClick = (event) => {
     
     event.target.classList.add('clicked'); // Aggiunge/rimuove la classe clicked (creata in css)
     console.log('hai cliccato la casella: ' + event.target.innerText); // E mi stampa in console il numero della cella
-    score++;
-    console.log('punteggio totale: ' + score);
+    if(bombs.includes(parseInt(event.target.innerText))){
+        event.target.classList.add('bomb');
+        alert('BOOM! Partita terminata.');
+        console.log('punteggio totale: ' + score);
+    } else{
+        score++;
+        console.log('punteggio totale: ' + score);
+    }
     
 }
 
@@ -141,8 +144,7 @@ button.addEventListener('click',() => {
         do{randomNum = getRandomNumber(1,totalCells); // Genero almeno un numero, finché non esce uno che non
         } while(bombs.includes(randomNum)); // Appartiene al ciclo while
         bombs.push(randomNum); // Solo allora lo pushiamo nell'array bombs
-        console.log(bombs);
-
+        
     }
 
     for(let i = 1; i <= totalCells; i++){ // Fintanto che non ho creato tante celle quante quelle richieste (in totalCells)
