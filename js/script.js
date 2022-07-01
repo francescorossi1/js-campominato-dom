@@ -39,9 +39,24 @@ const createCell = (number) => {
         cell.classList.add('hard-cell');
     }
     cell.innerText = number; // preparo la lettura del numero al suo interno
-
+    
     return cell;
 }
+
+// Funzione al click della cella
+
+const onCellClick = (event) => {
+    if(event.target.classList.contains('clicked')){
+        return;
+    }
+    
+    event.target.classList.add('clicked'); // Aggiunge/rimuove la classe clicked (creata in css)
+    console.log('hai cliccato la casella: ' + event.target.innerText); // E mi stampa in console il numero della cella
+    score++;
+    console.log('punteggio totale: ' + score);
+    
+}
+
 
 // * Steps 
 
@@ -64,17 +79,20 @@ const gridSelect = document.getElementById('grid-select');
 let rows;
 let cells;
 
+// Creo una variabile con il punteggio
+
+let score = 0;
 
 // Quando premo il pulsante start
 
 button.addEventListener('click',() => {
-
-// Pulisco la griglia
-
+    
+    // Pulisco la griglia
+    
     grid.innerHTML = ""
     
     
-
+    
     // Dichiaro le misure della mia griglia nelle variabili
     
     switch(gridSelect.value) {
@@ -96,15 +114,14 @@ button.addEventListener('click',() => {
         }
         
     }
-
-    const totalCells = rows * cells;
-
+    
+    const totalCells = rows * cells;   
+    
     for(let i = 1; i <= totalCells; i++){ // Fintanto che non ho creato tante celle quante quelle richieste (in totalCells)
         let cell = createCell(i); // Creo una cella (con variabile cell) usando la funzione createCell
         grid.appendChild(cell);  // Appendo la nuova cella alla griglia
-        cell.addEventListener('click',(event) => { // Osservo un evento applicato alla nuova cella quando essa viene cliccata
-            event.target.classList.add('clicked'); // Che aggiunge/rimuove la classe clicked (creata in css)
-            console.log('hai cliccato la casella: ' + [i]) // E mi stampa in console il numero della cella
-        })
+        cell.addEventListener('click',onCellClick); // Osservo il comportamento al click di ogni cella
+        
     }   
+    
 })
