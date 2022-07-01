@@ -59,6 +59,9 @@ const onCellClick = (event) => {
     } else{
         score++;
         console.log('punteggio totale: ' + score);
+        if(score === rows * cells - bombs.length){
+            alert('Hai vinto! Hai raggiunto il punteggio massimo!')
+        }
     }
     
 }
@@ -146,6 +149,7 @@ button.addEventListener('click',() => {
         bombs.push(randomNum); // Solo allora lo pushiamo nell'array bombs
         
     }
+    console.log(bombs)
 
     for(let i = 1; i <= totalCells; i++){ // Fintanto che non ho creato tante celle quante quelle richieste (in totalCells)
         let cell = createCell(i); // Creo una cella (con variabile cell) usando la funzione createCell
