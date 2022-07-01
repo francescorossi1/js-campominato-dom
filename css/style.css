@@ -34,7 +34,7 @@ body{
 #grid {
     display: flex;
     flex-wrap: wrap;
-    margin: 50px auto;
+    margin: 30px auto;
     width: 600px;
 }
 
