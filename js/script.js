@@ -39,6 +39,9 @@ const createCell = (number) => {
         cell.classList.add('hard-cell');
     }
     cell.innerText = number; // preparo la lettura del numero al suo interno
+    if(bombs.includes(parseInt(cell.innerText))){
+        cell.classList.add('bomb');
+    }
     
     return cell;
 }
@@ -55,6 +58,12 @@ const onCellClick = (event) => {
     score++;
     console.log('punteggio totale: ' + score);
     
+}
+
+// Funzione per creare un numero random
+
+const getRandomNumber = (min, max) => {
+    return Math.floor(Math.random() * (max + 1 - min)) + min;
 }
 
 
@@ -83,6 +92,10 @@ let cells;
 
 let score = 0;
 
+// Creo un array per le bombe
+
+let bombs = [];
+
 // Quando premo il pulsante start
 
 button.addEventListener('click',() => {
@@ -91,7 +104,11 @@ button.addEventListener('click',() => {
     
     grid.innerHTML = ""
     
+    // Resetto il punteggio
     
+    score = 0;
+
+    bombs = [];
     
     // Dichiaro le misure della mia griglia nelle variabili
     
@@ -117,11 +134,23 @@ button.addEventListener('click',() => {
     
     const totalCells = rows * cells;   
     
+    // Per 16 volte
+    for(let i = 1; i <= 16; i++){
+
+        let randomNum; // Creo la variabile di un numero
+        do{randomNum = getRandomNumber(1,totalCells); // Genero almeno un numero, finché non esce uno che non
+        } while(bombs.includes(randomNum)); // Appartiene al ciclo while
+        bombs.push(randomNum); // Solo allora lo pushiamo nell'array bombs
+        console.log(bombs);
+
+    }
+
     for(let i = 1; i <= totalCells; i++){ // Fintanto che non ho creato tante celle quante quelle richieste (in totalCells)
         let cell = createCell(i); // Creo una cella (con variabile cell) usando la funzione createCell
         grid.appendChild(cell);  // Appendo la nuova cella alla griglia
         cell.addEventListener('click',onCellClick); // Osservo il comportamento al click di ogni cella
         
     }   
+
     
 })
