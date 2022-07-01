@@ -19,7 +19,7 @@ const createCell = (number) => {
 
 const onCellClick = (event) => {
     let message = '';
-    if(event.target.classList.contains('clicked')){
+    if(event.target.classList.contains('clicked') || !end){
         return;
     }
     
@@ -28,8 +28,10 @@ const onCellClick = (event) => {
     if(bombs.includes(parseInt(event.target.innerText))){
         event.target.classList.add('bomb');
         message = 'BOOM! Partita terminata! ' + message;
+        end = false;
     } else if(score === rows * cells - bombs.length){
         message = 'Hai vinto! Hai raggiunto il punteggio massimo! ' + message;
+        end = false;
     } else{score++;}
     
     message += `Il tuo punteggio è ${score}`
@@ -67,6 +69,8 @@ const gridSelect = document.getElementById('grid-select');
 let rows;
 let cells;
 
+let end;
+
 // Creo una variabile con il punteggio
 
 let score = 0;
@@ -88,6 +92,8 @@ button.addEventListener('click',() => {
     score = 0;
     
     bombs = [];
+
+    end = true;
     
     // Dichiaro le misure della mia griglia nelle variabili
     
