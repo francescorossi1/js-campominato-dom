@@ -1,0 +1,63 @@
+*  {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container{
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+body{
+    background-color: lightgray;
+    margin: 0 auto;
+}
+
+#start-button{
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid darkgray;
+    cursor: pointer;
+
+}
+
+.navbar{
+    height: 70px;
+    line-height: 70px;
+    background-color: gray;
+    text-align: end;
+    padding: 0 30px;
+    box-shadow: 0 0 3px 5px rgb(71, 71, 71);
+}
+
+#grid {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 50px auto;
+    width: 600px;
+}
+
+.cell {
+    height: 10%;
+    width: 10%;
+    text-align: center;
+    line-height: 60px;
+    background-color: grey;
+    cursor: pointer;
+    border: 1px solid black;
+}
+
+.cell.medium-cell {
+    width: calc(100% / 9);
+    line-height: calc(600px / 9);
+}
+
+.cell.hard-cell {
+    width: calc(100% / 7);
+    line-height: calc(600px / 7);
+}
+
+.cell.clicked {
+    background-color: dodgerblue;
+}
