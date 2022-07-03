@@ -19,19 +19,18 @@ const createCell = (number) => {
 
 const onCellClick = (event) => {
     let message = '';
-    if(event.target.classList.contains('clicked') || !end){
-        return;
-    }
+    if(event.target.classList.contains('clicked') || end)  return;
     
     event.target.classList.add('clicked'); // Aggiunge/rimuove la classe clicked (creata in css)
     console.log('hai cliccato la casella: ' + event.target.innerText); // E mi stampa in console il numero della cella
     if(bombs.includes(parseInt(event.target.innerText))){
         event.target.classList.add('bomb');
         message = 'BOOM! Partita terminata! ' + message;
-        end = false;
-    } else if(score === rows * cells - bombs.length){
+        end = true;
+    } else if(score === (grid.childNodes.length - bombs.length - 1)){
+        score++;
         message = 'Hai vinto! Hai raggiunto il punteggio massimo! ' + message;
-        end = false;
+        end = true;
     } else{score++;}
     
     message += `Il tuo punteggio è ${score}`
@@ -89,29 +88,23 @@ button.addEventListener('click',() => {
     
     // Resetto il punteggio
     
-    score = 0;
-    
+    score = 0;   
     bombs = [];
-
-    end = true;
+    end = false;
     
     // Dichiaro le misure della mia griglia nelle variabili
     
     switch(gridSelect.value) {
         case "1": {
-            rows = 10;
-            cells = 10;
+            rows = cells = 10;
             break;
         };
         case "2": {
-            rows = 9
-            cells = 9;
-            
+            rows = cells = 9;
             break;
         }
         case "3": {
-            rows = 7
-            cells = 7;
+            rows = cells = 7;
             break;
         }
         
@@ -128,7 +121,6 @@ button.addEventListener('click',() => {
     bombs.push(randomNum); // Solo allora lo pushiamo nell'array bombs
     
 }
-console.log(bombs)
 
 
 for(let i = 1; i <= totalCells; i++){ // Fintanto che non ho creato tante celle quante quelle richieste (in totalCells)
@@ -137,6 +129,5 @@ for(let i = 1; i <= totalCells; i++){ // Fintanto che non ho creato tante celle 
         cell.addEventListener('click',onCellClick); // Osservo il comportamento al click di ogni cella
         
     }   
-    
-    
+        
 })
