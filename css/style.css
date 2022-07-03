@@ -10,7 +10,7 @@
 }
 
 body{
-    background-color: lightgray;
+    background-color: rgb(193, 200, 214);
     margin: 0 auto;
 }
 
@@ -24,9 +24,10 @@ body{
 
 .navbar{
     height: 70px;
-    line-height: 70px;
-    background-color: gray;
-    text-align: end;
+    background-color: rgb(148, 166, 204);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: 0 30px;
     box-shadow: 0 0 3px 5px rgb(71, 71, 71);
 }
@@ -36,6 +37,7 @@ body{
     flex-wrap: wrap;
     margin: 30px auto;
     width: 600px;
+    justify-content: center;
 }
 
 .cell {
@@ -43,7 +45,7 @@ body{
     width: 10%;
     text-align: center;
     line-height: 60px;
-    background-color: grey;
+    background-color: rgb(180, 180, 180);
     cursor: pointer;
     border: 1px solid black;
 }
@@ -64,4 +66,9 @@ body{
 
 .cell.bomb.clicked {
     background-color: red;
+}
+
+#result {
+    text-align: center;
+    font-size: 30px;
 }

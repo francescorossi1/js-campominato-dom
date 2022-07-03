@@ -25,15 +25,15 @@ const onCellClick = (event) => {
     console.log('hai cliccato la casella: ' + event.target.innerText); // E mi stampa in console il numero della cella
     if(bombs.includes(parseInt(event.target.innerText))){
         event.target.classList.add('bomb');
-        message = 'BOOM! Partita terminata! ' + message;
+        message = `<strong>BOOM!</strong> Partita terminata! ${message}`;
         end = true;
     } else if(score === (grid.childNodes.length - bombs.length - 1)){
         score++;
-        message = 'Hai vinto! Hai raggiunto il punteggio massimo! ' + message;
+        message = `<strong>Vittoria!</strong> Hai raggiunto il punteggio massimo! ${message}`
         end = true;
     } else{score++;}
     
-    message += `Il tuo punteggio è ${score}`
+    message += `Il tuo punteggio è: <strong>${score}</strong>`
     result.innerHTML = message;
     
 }
@@ -70,6 +70,8 @@ let cells;
 
 let end;
 
+grid.innerText = 'Seleziona una difficoltà e premi inizia!'
+
 // Creo una variabile con il punteggio
 
 let score = 0;
@@ -80,8 +82,9 @@ let bombs = [];
 
 // Quando premo il pulsante start
 
-button.addEventListener('click',() => {
+button.addEventListener('click',(event) => {
     
+    event.target.innerText = 'Gioca ancora!';
     // Pulisco la griglia
     
     grid.innerHTML = ""
